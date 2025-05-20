@@ -4,26 +4,29 @@
 class Entity {
 protected:
     std::string name;
-    int healthealthealth;
+    int health;
 
 public:
-    Entity(const std::string& name, int healthealthealth)
-    virtual void displayInfo() const
-    {
-        std::cout << "Name: " << name << ", HP: " << healthealthealth << std::endl;
+    Entity(const std::string& n, int h) : name(n), health(h) {}
+
+    virtual void displayInfo() const {
+        std::cout << "Имя: " << name << ", ХП: " << health << std::endl;
     }
+
     virtual ~Entity() {}
 };
 
 class Player : public Entity {
 private:
-    int exp;
+    int experience;
+
 public:
-    Player(const std::string& n, int health, int exp)
-        : Entity(n, health), exp(exp) {}
+    Player(const std::string& n, int h, int exp)
+        : Entity(n, h), experience(exp) {}
+
     void displayInfo() const override {
         Entity::displayInfo();
-        std::cout << "exp: " << exp << std::endl;
+        std::cout << "Опыт: " << experience << std::endl;
     }
 };
 
@@ -32,36 +35,41 @@ private:
     std::string type;
 
 public:
-    Enemy(const std::string& n, int health, const std::string& t)
-        : Entity(n, health), type(t) {}
+    Enemy(const std::string& n, int h, const std::string& t)
+        : Entity(n, h), type(t) {}
 
     void displayInfo() const override {
         Entity::displayInfo();
-        std::cout << "Type: " << type << std::endl;
+        std::cout << "Тип: " << type << std::endl;
     }
 };
 
 class Boss : public Enemy {
 private:
-    std::string specialAbility;
+    std::string Ultimate;
+
 public:
-    Boss(const std::string& n, int health, const std::string& t, const std::string& ability)
-        : Enemy(n, health, t), specialAbility(ability) {}
+    Boss(const std::string& n, int h, const std::string& t, const std::string& ability)
+        : Enemy(n, h, t), Ultimate(ability) {}
 
     void displayInfo() const override {
         Enemy::displayInfo();
-        std::cout << "Special Ability: " << specialAbility << std::endl;
+        std::cout << "Спецспособность: " << Ultimate << std::endl;
     }
 };
 
 int main() {
-    Player healthero("Hero", 100, 50);
-    Enemy monster("Goblin", 50, "Goblin");
-    Boss finalBoss("Dragon", 200, "Dragon", "Fireball");
+    Player hero("Герой", 100, 50);
+    Enemy monster("Гоблин", 50, "Гоблин");
+    Boss dragon("Дракон", 200, "Дракон", "Огненный шар");
 
-    healthero.displayInfo();
+    std::cout << "Информация об игроке:" << std::endl;
+    hero.displayInfo();
+
+    std::cout << "\nИнформация о враге:" << std::endl;
     monster.displayInfo();
-    finalBoss.displayInfo();
 
+    std::cout << "\nИнформация о боссе:" << std::endl;
+    dragon.displayInfo();
     return 0;
 }
