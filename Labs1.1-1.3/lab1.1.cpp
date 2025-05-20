@@ -10,7 +10,7 @@ private:
     int defense;      
 
 public:
-    Character(std::string& n, int h, int a, int d)
+    Character(std::string n, int h, int a, int d)
         : name(n), health(h), attack(a), defense(d) {}
 
     int getHealth() {
@@ -18,8 +18,8 @@ public:
     }
 
     void displayInfo() const {
-        std::cout << "Name: " << name << ", HP: " << health
-                  << ", Attack: " << attack << ", Defense: " << defense << std::endl;
+        std::cout << "Имя: " << name << ", ХП: " << health
+                  << ", Атака: " << attack << ", Защита: " << defense << std::endl;
     }
 
     void heal(int amount) {
@@ -27,7 +27,7 @@ public:
         if (health > 100) {
             health = 100;
         }
-        std::cout << name << " restores" << amount << " HP. Current HP: " << health << std::endl;
+        std::cout << name << " восстанавливает " << amount << " ХП. Текущее ХП: " << health << std::endl;
     }
 
     void takeDamage(int amount) {
@@ -35,7 +35,7 @@ public:
         if (health < 0) {
             health = 0;
         }
-        std::cout << name << " takes " << amount << " damage. Current HP: " << health << std::endl;
+        std::cout << name << " получает " << amount << " урона. Текущее ХП: " << health << std::endl;
     }
 
     
@@ -43,17 +43,17 @@ public:
         int damage = attack - enemy.defense;
         if (damage > 0) {
             enemy.health -= damage;
-            std::cout << name << " attacks " << enemy.name << " for " << damage << " damage!" << std::endl;
+            std::cout << name << " атакует " << enemy.name << " на " << damage << " урона!" << std::endl;
         } else {
-            std::cout << name << " attacks " << enemy.name << ", but it has no effect!" << std::endl;
+            std::cout << name << " атакует " << enemy.name << " без урона!" << std::endl;
         }
     }
 };
 
 
 int main() {
-    Character hero("Hero", 100, 20, 10);
-    Character monster("Goblin", 100, 50, 5);
+    Character hero("Герой", 100, 20, 10);
+    Character monster("Гоблин", 100, 50, 5);
 
     hero.displayInfo();
     monster.displayInfo();
@@ -64,10 +64,10 @@ int main() {
     monster.attackEnemy(hero);
     hero.displayInfo();
 
-    hero.heal(10);
+    hero.heal(20);
     hero.displayInfo();
 
-    monster.takeDamage(10);
+    monster.takeDamage(20);
     monster.displayInfo();
 
     return 0;
